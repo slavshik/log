@@ -1,0 +1,9 @@
+{
+  "name": "tinylog",
+  "version": "0.0.0",
+  "description": "Tiny log with styling for the browser console.",
+  "main": "src/index.ts",
+  "repository": "git@github.com:slavshik/tinylog.git",
+  "author": "Alexander Slavschik",
+  "license": "MIT"
+}
