@@ -2,8 +2,24 @@
   "name": "tinylog",
   "version": "0.0.0",
   "description": "Tiny log with styling for the browser console.",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "typings": "dist/dts/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
   "repository": "git@github.com:slavshik/tinylog.git",
   "author": "Alexander Slavschik",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin typescript"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^8.2.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.56.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
+  }
 }

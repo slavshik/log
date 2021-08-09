@@ -16,7 +16,7 @@ const settings: {[level: number]: LogLevelSetting} = {
 };
 
 const tryToLog =
-    (level: number) =>
+    (level: number, scope = "") =>
     (...params: any[]) => {
         if (CURRENT_LOG_LEVEL >= level) {
             if (settings[level]) {
@@ -46,13 +46,16 @@ const tryToLog =
             }
         }
     };
-
+const scope = (scopeName?: string) => ({
+    trace: (...params: unknown[]) => tryToLog(6)(params, scopeName),
+    debug: (...params: unknown[]) => tryToLog(5)(params, scopeName),
+    warn: (...params: unknown[]) => tryToLog(4)(params, scopeName),
+    error: (...params: unknown[]) => tryToLog(3)(params, scopeName),
+    info: (...params: unknown[]) => tryToLog(2)(params, scopeName),
+    fatal: (...params: unknown[]) => tryToLog(1)(params, scopeName)
+});
 export const log = {
-    trace: (...params: any[]) => tryToLog(6)(params),
-    debug: (...params: any[]) => tryToLog(5)(params),
-    warn: (...params: any[]) => tryToLog(4)(params),
-    error: (...params: any[]) => tryToLog(3)(params),
-    info: (...params: any[]) => tryToLog(2)(params),
-    fatal: (...params: any[]) => tryToLog(1)(params),
+    ...scope(),
+    scope,
     setLevel: (level: number) => (CURRENT_LOG_LEVEL = level)
 };
