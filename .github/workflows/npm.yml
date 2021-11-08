@@ -4,12 +4,23 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: 10
-      - run: npm install
-      - run: npm test
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
+          node-version: '14.x'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Intalling
+        run: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Testing
+        run: yarn test
+
+      - name: Publishing
+        run:
+          yarn release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

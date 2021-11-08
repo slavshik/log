@@ -12,7 +12,7 @@
   "author": "Alexander Slavschik",
   "license": "MIT",
   "scripts": {
-	"prebump": "standard-version",
+    "release": "standard-version",
     "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin typescript"
   },
   "standard-version": {
