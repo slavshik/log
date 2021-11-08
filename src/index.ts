@@ -17,36 +17,36 @@ const settings: {[level: number]: LogLevelSetting} = {
 
 const tryToLog =
     (level: number, scope = "") =>
-    (...params: any[]) => {
-        if (CURRENT_LOG_LEVEL >= level) {
-            if (settings[level]) {
-                const [tag, colors, logFunction] = settings[level];
-                const idd: string[] = params.map(item => {
-                    switch (typeof item) {
-                        case "string":
-                            return "%s";
-                        case "boolean":
-                            return "%o";
-                        case "number":
-                            return (0 ^ item) === item ? "%i" : "%f";
-                        default:
-                            return "%O";
-                    }
-                });
+        (...params: any[]) => {
+            if (CURRENT_LOG_LEVEL >= level) {
+                if (settings[level]) {
+                    const [tag, colors, logFunction] = settings[level];
+                    const idd: string[] = params.map(item => {
+                        switch (typeof item) {
+                            case "string":
+                                return "%s";
+                            case "boolean":
+                                return "%o";
+                            case "number":
+                                return (0 ^ item) === item ? "%i" : "%f";
+                            default:
+                                return "%O";
+                        }
+                    });
 
-                logFunction.apply(
-                    null,
-                    [
-                        `%s %c #%s %c ${idd.join(" ")}`,
-                        scope,
-                        `background-color:${colors[0] ? colors[0] : "color:white"}`,
-                        tag,
-                        colors[1] ? `color: ${colors[1]}` : ""
-                    ].concat(...params)
-                );
+                    logFunction.apply(
+                        null,
+                        [
+                            `%s %c #%s %c ${idd.join(" ")}`,
+                            scope,
+                            `background-color:${colors[0] ? colors[0] : "color:white"}`,
+                            tag,
+                            colors[1] ? `color: ${colors[1]}` : ""
+                        ].concat(...params)
+                    );
+                }
             }
-        }
-    };
+        };
 const scope = (scopeName?: string) => ({
     trace: (...params: unknown[]) => tryToLog(6, scopeName)(params),
     debug: (...params: unknown[]) => tryToLog(5, scopeName)(params),
