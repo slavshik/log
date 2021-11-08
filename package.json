@@ -13,6 +13,7 @@
   "license": "MIT",
   "scripts": {
     "release": "standard-version",
+    "test": "echo \"No tests specified\" && exit 0",
     "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin typescript"
   },
   "standard-version": {
