@@ -5,13 +5,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          # pulls all commits (needed for semantic release to correctly version)
+          fetch-depth: "0"
+
+      - name: Preparing git
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Intalling
+      - name: Installing
         run: yarn install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
