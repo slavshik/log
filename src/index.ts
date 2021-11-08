@@ -37,7 +37,8 @@ const tryToLog =
                 logFunction.apply(
                     null,
                     [
-                        `%c #%s %c ${idd.join(" ")}`,
+                        `%s %c #%s %c ${idd.join(" ")}`,
+                        scope,
                         `background-color:${colors[0] ? colors[0] : "color:white"}`,
                         tag,
                         colors[1] ? `color: ${colors[1]}` : ""
@@ -47,12 +48,12 @@ const tryToLog =
         }
     };
 const scope = (scopeName?: string) => ({
-    trace: (...params: unknown[]) => tryToLog(6)(params, scopeName),
-    debug: (...params: unknown[]) => tryToLog(5)(params, scopeName),
-    warn: (...params: unknown[]) => tryToLog(4)(params, scopeName),
-    error: (...params: unknown[]) => tryToLog(3)(params, scopeName),
-    info: (...params: unknown[]) => tryToLog(2)(params, scopeName),
-    fatal: (...params: unknown[]) => tryToLog(1)(params, scopeName)
+    trace: (...params: unknown[]) => tryToLog(6, scopeName)(params),
+    debug: (...params: unknown[]) => tryToLog(5, scopeName)(params),
+    warn: (...params: unknown[]) => tryToLog(4, scopeName)(params),
+    error: (...params: unknown[]) => tryToLog(3, scopeName)(params),
+    info: (...params: unknown[]) => tryToLog(2, scopeName)(params),
+    fatal: (...params: unknown[]) => tryToLog(1, scopeName)(params)
 });
 export const log = {
     ...scope(),
