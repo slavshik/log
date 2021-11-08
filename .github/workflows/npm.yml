@@ -5,9 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          # pulls all commits (needed for semantic release to correctly version)
-          fetch-depth: "0"
 
       - name: Preparing git
         run: |
@@ -34,3 +31,15 @@ jobs:
           yarn release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Saving yarn.lock
+        run: |
+          mv yarn.lock yarn-ci.lock
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "yarn.lock wasn't changed"
+          else
+            # commiting the file
+            git add yarn.lock
+            git commit -m "chore(yarn.lock): updated [ci skip]"
+            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/slavhsik/logger-that-i-use.git
+          fi
