@@ -40,5 +40,5 @@ jobs:
             # commiting the file
             git add yarn.lock
             git commit -m "chore(yarn.lock): updated [ci skip]"
-            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/slavhsik/logger-that-i-use.git
+            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/{{ env.GITHUB_REPOSITORY }}
           fi
