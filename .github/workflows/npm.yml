@@ -27,6 +27,7 @@ jobs:
 
       - name: Publishing
         run: |
+          yarn build
           yarn release
           git push --follow-tags origin main
           npm publish
