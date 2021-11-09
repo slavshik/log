@@ -10,7 +10,6 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
       - uses: actions/setup-node@v2
         with:
