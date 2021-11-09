@@ -26,14 +26,15 @@ jobs:
         run: yarn test
 
       - name: Publishing
-        run:
+        run: |
           yarn release
+          git push --follow-tags origin main
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Saving yarn.lock
         run: |
-          mv yarn.lock yarn-ci.lock
           if [ -z "$(git status --porcelain)" ]; then
             echo "yarn.lock wasn't changed"
           else
