@@ -31,13 +31,15 @@ const tryToLog =
             if (CURRENT_LOG_LEVEL >= level) {
                 if (settings[level]) {
                     const [tag, colors, log_fn] = settings[level];
-                    log_fn.apply(null, [
-                        `${scope} %c #%s %c ${params.map(typeToPrintf).join(" ")}`,
-                        `background-color:${colors[0] || ""};color:white;`,
-                        tag,
-                        colors[1] ? `color:${colors[1]};` : "",
-                        ...params
-                    ]);
+                    log_fn.apply(
+                        null,
+                        [
+                            `${scope} %c #%s %c ${params.map(typeToPrintf).join(" ")}`,
+                            `background-color:${colors[0] || ""};color:white;`,
+                            tag,
+                            colors[1] ? `color:${colors[1]};` : ""
+                        ].concat(params)
+                    );
                 }
             }
         };
@@ -49,8 +51,7 @@ const scope = (name?: string) => ({
     info: (...params: unknown[]) => tryToLog(2, name)(params),
     fatal: (...params: unknown[]) => tryToLog(1, name)(params)
 });
-export const log = {
-    ...scope(),
+export const log = Object.assign(scope(), {
     scope,
     setLevel: (level: number) => (CURRENT_LOG_LEVEL = level)
-};
+});
