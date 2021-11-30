@@ -1,5 +1,5 @@
 # Logger that I use
-## As simople as possible
+## As simple as possible
 [![Version](https://img.shields.io/npm/v/tinylog.svg)](https://npmjs.org/package/tinylog)
 [![Downloads/week](https://img.shields.io/npm/dw/tinylog.svg)](https://npmjs.org/package/tinylog)
 [![License](https://img.shields.io/npm/l/tinylog.svg)](https://github.com/alex-slv4/tinylog/blob/main/package.json)
@@ -27,6 +27,6 @@ log.debug("debug message with number:", Math.random());
 const scopedLog = log.scope("scope");
 scopedLog.debug("debug message");
 ```
-### Pictures
+### Screenshots
 <img src="https://i.ibb.co/d4k8FPM/logger-chrome.png" alt="Chrome (Dark)" />
 <img src="https://i.ibb.co/rGB0NXf/logger-safari.png" alt="Safari" />
