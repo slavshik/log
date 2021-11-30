@@ -1,4 +1,4 @@
-# Logger that I use
+# @slavshik/log
 ## As simple as possible
 [![Version](https://img.shields.io/npm/v/tinylog.svg)](https://npmjs.org/package/tinylog)
 [![Downloads/week](https://img.shields.io/npm/dw/tinylog.svg)](https://npmjs.org/package/tinylog)
