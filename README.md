@@ -1,8 +1,8 @@
 # @slavshik/log
 ### As simple as possible
-[![Version](https://img.shields.io/npm/v/tinylog.svg)](https://npmjs.org/package/tinylog)
-[![Downloads/week](https://img.shields.io/npm/dw/tinylog.svg)](https://npmjs.org/package/tinylog)
-[![License](https://img.shields.io/npm/l/tinylog.svg)](https://github.com/alex-slv4/tinylog/blob/main/package.json)
+[![Version](https://img.shields.io/npm/v/@slavshik/log.svg)]([https://npmjs.org/package/tinylog](https://www.npmjs.com/package/@slavshik/log))
+[![Downloads/week](https://img.shields.io/npm/dw/@slavshik/log.svg)](https://npmjs.org/package/@slavshik/log)
+[![License](https://img.shields.io/npm/l/@slavshik/log.svg)](https://github.com/slavshik/log/blob/main/package.json)
 ### Example
 
 ```js
