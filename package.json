@@ -1,6 +1,6 @@
 {
   "name": "@slavshik/log",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Tiny log with styling for the browser console.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
