@@ -1,4 +1,6 @@
-let CURRENT_LOG_LEVEL = 2; // error level by default
+import {LogLevel, LogLevelName, resolveLevel} from "./levels";
+
+let CURRENT_LOG_LEVEL: number = LogLevel.info; // error level by default
 type LogLevelSetting = [
     tag: string,
     colors: [background: string] | [background: string, foreground: string],
@@ -6,12 +8,12 @@ type LogLevelSetting = [
 ];
 
 const settings: {[level: number]: LogLevelSetting} = {
-    [1]: ["fatal", ["#7c002a"], console.error],
-    [2]: ["info", ["#4454FF", "#7e86de"], console.info],
-    [3]: ["error", ["#f31"], console.error],
-    [4]: ["warn", ["#ffcd84"], console.warn],
-    [5]: ["debug", ["#168d21", "#168d21"], console.log],
-    [6]: ["trace", ["#aaa"], console.log]
+    [LogLevel.fatal]: ["fatal", ["#7c002a"], console.error],
+    [LogLevel.info]: ["info", ["#4454FF", "#7e86de"], console.info],
+    [LogLevel.error]: ["error", ["#f31"], console.error],
+    [LogLevel.warn]: ["warn", ["#ffcd84"], console.warn],
+    [LogLevel.debug]: ["debug", ["#168d21", "#168d21"], console.log],
+    [LogLevel.trace]: ["trace", ["#aaa"], console.log]
 };
 const typeToPrintf = (item: any) => {
     switch (typeof item) {
@@ -44,14 +46,17 @@ const tryToLog =
             }
         };
 const scope = (name?: string) => ({
-    trace: (...params: unknown[]) => tryToLog(6, name)(params),
-    debug: (...params: unknown[]) => tryToLog(5, name)(params),
-    warn: (...params: unknown[]) => tryToLog(4, name)(params),
-    error: (...params: unknown[]) => tryToLog(3, name)(params),
-    info: (...params: unknown[]) => tryToLog(2, name)(params),
-    fatal: (...params: unknown[]) => tryToLog(1, name)(params)
+    trace: (...params: unknown[]) => tryToLog(LogLevel.trace, name)(params),
+    debug: (...params: unknown[]) => tryToLog(LogLevel.debug, name)(params),
+    warn: (...params: unknown[]) => tryToLog(LogLevel.warn, name)(params),
+    error: (...params: unknown[]) => tryToLog(LogLevel.error, name)(params),
+    info: (...params: unknown[]) => tryToLog(LogLevel.info, name)(params),
+    fatal: (...params: unknown[]) => tryToLog(LogLevel.fatal, name)(params)
 });
 export const log = Object.assign(scope(), {
     scope,
-    setLevel: (level: number) => (CURRENT_LOG_LEVEL = level)
+    setLevel: (level: LogLevelName | number) => (CURRENT_LOG_LEVEL = resolveLevel(level))
 });
+
+export {LogLevel};
+export type {LogLevelName};

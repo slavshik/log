@@ -2,13 +2,13 @@
     "compilerOptions": {
         "target": "es5",
         "module": "esnext",
-        "declaration": true,
+        "declaration": false,
         "moduleResolution": "node",
         "noEmitOnError": true,
         "lib": ["es2017", "DOM"],
         "strict": true,
         "esModuleInterop": false,
-        "outDir": "./dts",
+        "outDir": "./dist",
         "rootDir": "./src"
     },
     "include": ["./src/**/*.ts"]
